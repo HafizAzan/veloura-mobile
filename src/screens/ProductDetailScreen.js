@@ -14,6 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 import { getProductById } from '../api/products';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import ScreenBackButton from '../components/ScreenBackButton';
 import { colors } from '../theme/colors';
 
 export default function ProductDetailScreen() {
@@ -84,9 +85,13 @@ export default function ProductDetailScreen() {
       <View style={styles.centered}>
         <StatusBar style="dark" />
         <Text style={styles.errorText}>{error || 'Product not found.'}</Text>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.linkBtn}>
-          <Text style={styles.linkText}>← Back to shop</Text>
-        </TouchableOpacity>
+        <ScreenBackButton
+          onPress={() => navigation.goBack()}
+          label="Back to shop"
+          variant="primary"
+          style={styles.linkBtn}
+          textStyle={styles.backMuted}
+        />
       </View>
     );
   }
@@ -159,9 +164,13 @@ export default function ProductDetailScreen() {
           >
             <Text style={styles.addBtnText}>Add to bag</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Shop')} style={styles.backLink}>
-            <Text style={styles.backLinkText}>← Back to shop</Text>
-          </TouchableOpacity>
+          <ScreenBackButton
+            onPress={() => navigation.navigate('Shop')}
+            label="Back to shop"
+            variant="primary"
+            style={styles.backLink}
+            textStyle={styles.backMuted}
+          />
         </View>
       </ScrollView>
     </View>
@@ -232,9 +241,8 @@ const styles = StyleSheet.create({
   addBtnDisabled: { opacity: 0.5 },
   addBtnText: { color: colors.white, fontSize: 18, fontWeight: '700' },
   backLink: { marginTop: 16 },
-  backLinkText: { fontSize: 14, color: colors.deepRoyalLightPlum },
+  backMuted: { fontSize: 14, fontWeight: '500' },
   centered: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24 },
   errorText: { color: '#b91c1c', textAlign: 'center', marginBottom: 12 },
-  linkBtn: { marginTop: 8 },
-  linkText: { fontSize: 14, color: colors.deepRoyalLightPlum },
+  linkBtn: { marginTop: 8, alignSelf: 'center' },
 });

@@ -1,5 +1,16 @@
 import api from './client';
 
+export async function fetchOrdersForUser(userId) {
+  if (!userId) return [];
+  const data = await api(`orders?userId=${encodeURIComponent(userId)}`, { method: 'GET' });
+  return Array.isArray(data) ? data : [];
+}
+
+export async function fetchOrderById(orderId) {
+  if (!orderId) return null;
+  return api(`orders/${encodeURIComponent(orderId)}`, { method: 'GET' });
+}
+
 export async function createOrder(payload) {
   const body = {
     orderId: payload.orderId || `VL-${Date.now().toString(36).toUpperCase().slice(-6)}`,

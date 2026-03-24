@@ -19,8 +19,17 @@ import FAQScreen from '../screens/FAQScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
 import TermsScreen from '../screens/TermsScreen';
 import AboutUsScreen from '../screens/AboutUsScreen';
+import AccountScreen from '../screens/AccountScreen';
+import AccountProfileScreen from '../screens/AccountProfileScreen';
+import AccountOrdersScreen from '../screens/AccountOrdersScreen';
+import AccountAddressesScreen from '../screens/AccountAddressesScreen';
+import AccountOrderDetailScreen from '../screens/AccountOrderDetailScreen';
+import ContentPageScreen from '../screens/ContentPageScreen';
+import AuthCallbackScreen from '../screens/AuthCallbackScreen';
+import { STATIC_PAGES } from '../data/staticContentPages';
 
 const Stack = createNativeStackNavigator();
+const STATIC_PAGE_NAMES = Object.keys(STATIC_PAGES);
 
 const defaultScreenOptions = {
   contentStyle: { backgroundColor: '#fdf6f2' },
@@ -55,6 +64,15 @@ export default function AppNavigator() {
         <Stack.Screen name="Checkout" component={CheckoutScreen} options={headerScreenOptions} />
         <Stack.Screen name="CheckoutSuccess" component={CheckoutSuccessScreen} options={headerScreenOptions} />
         <Stack.Screen name="AboutUs" component={AboutUsScreen} options={headerScreenOptions} />
+        <Stack.Screen name="Account" component={AccountScreen} options={headerScreenOptions} />
+        <Stack.Screen name="AccountProfile" component={AccountProfileScreen} options={headerScreenOptions} />
+        <Stack.Screen name="AccountOrders" component={AccountOrdersScreen} options={headerScreenOptions} />
+        <Stack.Screen name="AccountOrderDetail" component={AccountOrderDetailScreen} options={headerScreenOptions} />
+        <Stack.Screen name="AccountAddresses" component={AccountAddressesScreen} options={headerScreenOptions} />
+        {STATIC_PAGE_NAMES.map((name) => (
+          <Stack.Screen key={name} name={name} component={ContentPageScreen} options={headerScreenOptions} />
+        ))}
+        <Stack.Screen name="AuthCallback" component={AuthCallbackScreen} options={authScreenOptions} />
         <Stack.Screen name="ContactUs" component={ContactUsScreen} options={headerScreenOptions} />
         <Stack.Screen name="FAQ" component={FAQScreen} options={headerScreenOptions} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} options={headerScreenOptions} />

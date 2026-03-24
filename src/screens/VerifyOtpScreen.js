@@ -12,6 +12,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { useAuth } from '../context/AuthContext';
 import AuthLayoutScreen, { cardStyle } from '../components/AuthLayoutScreen';
+import ScreenBackButton from '../components/ScreenBackButton';
 import { colors } from '../theme/colors';
 
 export default function VerifyOtpScreen() {
@@ -124,12 +125,13 @@ export default function VerifyOtpScreen() {
             {resending ? 'Sending…' : 'Resend code'}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.backBtn}
+        <ScreenBackButton
           onPress={() => navigation.navigate(backLink)}
-        >
-          <Text style={styles.backBtnText}>← {backLabel}</Text>
-        </TouchableOpacity>
+          label={backLabel}
+          variant="muted"
+          style={styles.backBtn}
+          textStyle={styles.backBtnText}
+        />
       </View>
     </AuthLayoutScreen>
   );
@@ -188,6 +190,6 @@ const styles = StyleSheet.create({
   },
   backBtnText: {
     fontSize: 14,
-    color: colors.textMuted,
+    fontWeight: '500',
   },
 });

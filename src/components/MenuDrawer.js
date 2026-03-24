@@ -7,7 +7,7 @@ import {
   Modal,
   Pressable,
   Animated,
-  Dimensions,
+  ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useMenu } from '../context/MenuContext';
@@ -97,14 +97,20 @@ export default function MenuDrawer() {
             },
           ]}
         >
-          <Pressable style={styles.panelInner} onPress={(e) => e.stopPropagation()}>
+          <View style={styles.panelInner}>
             <View style={styles.panelHead}>
               <Text style={styles.logo}>Veloura</Text>
               <TouchableOpacity onPress={runCloseAnimation} style={styles.closeBtn}>
                 <Text style={styles.closeText}>✕</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.nav}>
+            <ScrollView
+              style={styles.navScroll}
+              contentContainerStyle={styles.navScrollContent}
+              showsVerticalScrollIndicator
+              keyboardShouldPersistTaps="handled"
+              bounces
+            >
               {navItems.map((item) => (
                 <TouchableOpacity
                   key={item.name}
@@ -119,7 +125,7 @@ export default function MenuDrawer() {
                 <>
                   <TouchableOpacity
                     style={styles.navItem}
-                    onPress={() => handleNav('Home')}
+                    onPress={() => handleNav('Account')}
                   >
                     <Text style={styles.navItemText}>Account</Text>
                   </TouchableOpacity>
@@ -142,8 +148,8 @@ export default function MenuDrawer() {
                   <Text style={styles.navItemText}>Sign in</Text>
                 </TouchableOpacity>
               )}
-            </View>
-          </Pressable>
+            </ScrollView>
+          </View>
         </Animated.View>
       </View>
     </Modal>
@@ -174,6 +180,7 @@ const styles = StyleSheet.create({
   },
   panelInner: {
     flex: 1,
+    minHeight: 0,
   },
   panelHead: {
     flexDirection: 'row',
@@ -193,7 +200,15 @@ const styles = StyleSheet.create({
   },
   closeBtn: { padding: 8 },
   closeText: { fontSize: 20, color: colors.softBeige },
-  nav: { padding: 20, paddingTop: 16 },
+  navScroll: {
+    flex: 1,
+    minHeight: 0,
+  },
+  navScrollContent: {
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 28,
+  },
   navItem: {
     paddingVertical: 14,
     paddingHorizontal: 4,

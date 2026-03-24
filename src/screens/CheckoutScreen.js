@@ -16,6 +16,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { createOrder } from '../api/orders';
+import ScreenBackButton from '../components/ScreenBackButton';
 import { colors } from '../theme/colors';
 
 const initialShipping = {
@@ -106,9 +107,13 @@ export default function CheckoutScreen() {
         style={styles.keyboard}
       >
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={styles.backText}>← Back to cart</Text>
-          </TouchableOpacity>
+          <ScreenBackButton
+            onPress={() => navigation.goBack()}
+            label="Back to cart"
+            variant="light"
+            style={styles.backRow}
+            textStyle={styles.backLabel}
+          />
           <Text style={styles.headerTitle}>Checkout</Text>
           <Text style={styles.headerSub}>Enter your shipping details to place your order.</Text>
         </View>
@@ -167,7 +172,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 56,
   },
-  backText: { fontSize: 14, color: 'rgba(234,227,214,0.8)', marginBottom: 8 },
+  backRow: { marginBottom: 8 },
+  backLabel: { fontSize: 14, fontWeight: '500' },
   headerTitle: { fontSize: 22, fontFamily: 'Georgia', color: colors.white, marginBottom: 4 },
   headerSub: { fontSize: 14, color: 'rgba(234,227,214,0.8)' },
   scroll: { flex: 1 },

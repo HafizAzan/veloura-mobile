@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import ScreenBackButton from './ScreenBackButton';
 import { colors } from '../theme/colors';
 
 /**
@@ -29,13 +30,14 @@ export default function AuthLayoutScreen({
         {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
         {children}
         {backToHome && (
-          <TouchableOpacity
-            style={styles.backLink}
+          <ScreenBackButton
             onPress={() => navigation.navigate('Home')}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.backLinkText}>← Back to home</Text>
-          </TouchableOpacity>
+            label="Back to home"
+            variant="light"
+            style={styles.backLink}
+            textStyle={styles.backLinkText}
+            iconSize={20}
+          />
         )}
       </View>
     </View>
@@ -98,10 +100,11 @@ const styles = StyleSheet.create({
   },
   backLink: {
     marginTop: 32,
+    alignSelf: 'center',
   },
   backLinkText: {
     fontSize: 14,
-    color: 'rgba(234, 227, 214, 0.7)',
+    fontWeight: '400',
   },
 });
 
